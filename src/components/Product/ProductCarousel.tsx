@@ -25,7 +25,6 @@ export const ProductCarousel = () => {
     return () => clearInterval(interval);
   }, [api]);
 
-
   if (!products || products.length === 0) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -34,10 +33,7 @@ export const ProductCarousel = () => {
     );
   }
 
-  const carouselProducts = [
-    ...products.slice(0, 3),
-    ...products.slice(-3)
-  ];
+  const carouselProducts = [...products.slice(0, 3), ...products.slice(-3)];
 
   return (
     <div className="h-screen w-full flex items-center justify-center p-8">
@@ -76,8 +72,6 @@ export const ProductCarousel = () => {
           <CarouselPrevious className="-left-12 bg-white/80 hover:bg-white border-gray-200" />
           <CarouselNext className="-right-12 bg-white/80 hover:bg-white border-gray-200" />
         </Carousel>
-
-
       </div>
     </div>
   );

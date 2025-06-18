@@ -52,7 +52,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
         <Button
           onClick={() => addToCart(product)}
-          className="w-full"
+          className="w-full text-secondary"
           disabled={!product.available}
         >
           {product.available ? "Adicionar ao Carrinho" : "Indisponível"}
