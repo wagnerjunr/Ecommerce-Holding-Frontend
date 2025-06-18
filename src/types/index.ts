@@ -7,7 +7,8 @@ export interface Product {
   available: boolean;
   image:string;
   description:string;
-  
+  material:string;
+  discountValue?:number;
 }
 
 export interface CartItem extends Product {
