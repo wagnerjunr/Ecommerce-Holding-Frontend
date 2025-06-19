@@ -10,9 +10,11 @@ import {
 } from "@/components/ui/carousel";
 import { ProductCard } from "./ProductCard";
 import type { Product } from "@/types";
+import { ProductCardSkeleton } from "./ProductCardSkeleton";
+import { Skeleton } from "../ui/skeleton";
 
 export const ProductCarousel = () => {
-  const { data: products } = useGetProducts();
+  const { data: products, isLoading } = useGetProducts();
   const [api, setApi] = React.useState<CarouselApi>();
 
   useEffect(() => {
@@ -25,10 +27,28 @@ export const ProductCarousel = () => {
     return () => clearInterval(interval);
   }, [api]);
 
-  if (!products || products.length === 0) {
+  if (isLoading || !products || products.length === 0) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="text-lg">Nenhum produto encontrado</div>
+      <div className="h-screen w-full flex items-center justify-center p-8">
+        <div className="w-full max-w-7xl">
+          <div className="text-center mb-8">
+            <Skeleton className="h-10 w-80 mx-auto mb-2" />
+            <Skeleton className="h-6 w-96 mx-auto" />
+          </div>
+
+          <div className="relative">
+            <div className="flex gap-4 overflow-hidden">
+              {Array.from({ length: 4 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4"
+                >
+                  <ProductCardSkeleton />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

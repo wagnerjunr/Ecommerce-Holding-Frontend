@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ProductCard } from "./ProductCard";
+import { ProductListSkeleton } from "./ProductListSkeleton";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { useGetProducts } from "@/hooks/Products/useGetProducts";
@@ -65,11 +66,7 @@ export const ProductList = () => {
   };
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-[400px]">
-        <div className="text-lg">Carregando produtos...</div>
-      </div>
-    );
+    return <ProductListSkeleton />;
   }
 
   return (

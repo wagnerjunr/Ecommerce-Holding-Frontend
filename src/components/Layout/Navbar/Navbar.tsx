@@ -3,10 +3,12 @@ import { Input } from "../../ui/input";
 import { MessageCircleMore, ShoppingCart } from "lucide-react";
 import logo from "./logo.png";
 import useCartStore from "@/store/cartStore";
+import useDrawerStore from "@/store/drawerStore";
 
 export const Navbar = () => {
   const user = false;
   const { itemCount } = useCartStore();
+  const { openCartDrawer } = useDrawerStore();
 
   return (
     <nav className="min-h-[80px] max-h-[80px] min-w-full border-b flex items-center justify-center fixed top-0 bg-background backdrop-blur-xl z-30">
@@ -28,6 +30,7 @@ export const Navbar = () => {
             <Button
               className="h-fit rounded-2xl p-3 cursor-pointer"
               variant="ghost"
+              onClick={openCartDrawer}
             >
               <ShoppingCart size={24} className="text-black" />
             </Button>

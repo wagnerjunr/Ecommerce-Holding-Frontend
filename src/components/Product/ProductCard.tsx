@@ -4,6 +4,7 @@ import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import type { Product } from "@/types";
 import useCartStore from "@/store/cartStore";
+import useDrawerStore from "@/store/drawerStore";
 
 interface ProductCardProps {
   product: Product;
@@ -11,9 +12,15 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addToCart } = useCartStore();
+  const { openCartDrawer } = useDrawerStore();
 
   const productName =
     product.name.charAt(0).toUpperCase() + product.name.slice(1);
+
+    const handleAddToCart = () => {
+      addToCart(product);
+      openCartDrawer();
+    }
 
   return (
     <Card className="h-full flex flex-col gap-4">
@@ -51,7 +58,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         )}
 
         <Button
-          onClick={() => addToCart(product)}
+          onClick={handleAddToCart}
           className="w-full text-secondary"
           disabled={!product.available}
         >
