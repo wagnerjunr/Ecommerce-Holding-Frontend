@@ -1,7 +1,7 @@
 import { useGetProductById } from "@/hooks/Products/useGetProductById";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ShoppingCart, Package, FileText } from "lucide-react";
+import { ArrowLeft, ShoppingCart, Package } from "lucide-react";
 import useCartStore from "@/store/cartStore";
 import useDrawerStore from "@/store/drawerStore";
 import { PageLayout } from "@/components/Layout/PageLayout/PageLayout";
@@ -38,15 +38,11 @@ export const ProductPage = ({ productId, provider }: ProductPageProps) => {
               <div className="space-y-4">
                 <div className="h-8 bg-gray-200 rounded w-3/4"></div>
                 <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                <div className="h-20 bg-gray-200 rounded"></div>
                 <div className="h-6 bg-gray-200 rounded w-1/4"></div>
+                <div className="h-4 bg-gray-200 rounded w-1/2"></div>
                 <div className="h-12 bg-gray-200 rounded w-full"></div>
               </div>
-            </div>
-            <div className="mt-8 space-y-4">
-              <div className="h-6 bg-gray-200 rounded w-1/3"></div>
-              <div className="h-20 bg-gray-200 rounded"></div>
-              <div className="h-6 bg-gray-200 rounded w-1/4"></div>
-              <div className="h-4 bg-gray-200 rounded w-1/2"></div>
             </div>
           </div>
         </div>
@@ -63,8 +59,12 @@ export const ProductPage = ({ productId, provider }: ProductPageProps) => {
 
   return (
     <PageLayout>
-      <div className="container mx-auto px-4 py-8">
-        <Button onClick={handleGoBack} variant="ghost" className="mb-6">
+      <div className="container mx-auto">
+        <Button
+          onClick={handleGoBack}
+          variant="ghost"
+          className="mb-6 px-0 w-fit"
+        >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Voltar
         </Button>
@@ -84,62 +84,82 @@ export const ProductPage = ({ productId, provider }: ProductPageProps) => {
             )}
           </div>
 
-          <div className="space-y-6">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                {productName}
-              </h1>
-              <Badge variant="secondary" className="mb-4">
-                {product.provider}
-              </Badge>
-            </div>
+          <div className="flex flex-col justify-between h-full">
+            <div className="flex flex-col justify-evenly h-full">
+              <div>
+                <h1 className="text-5xl font-bold text-gray-900 mb-2">
+                  {productName}
+                </h1>
+                <Badge variant="secondary" className="mb-4">
+                  {product.provider}
+                </Badge>
+              </div>
+              <div className="flex flex-col gap-4">
+                {product.description && (
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-2">
+                      <span className="text-sm font-medium text-gray-900">
+                        Descrição
+                      </span>
+                    </div>
+                    <div>
+                      <p className="text-gray-700 leading-relaxed whitespace-pre-line text-xl">
+                        {product.description}
+                      </p>
+                    </div>
+                  </div>
+                )}
 
-            <div className="space-y-2">
-              {product.discountValue ? (
-                <div className="space-y-1">
-                  <div className="text-sm text-gray-500 line-through">
-                    ${product.price?.toFixed(2)}
-                  </div>
-                  <div className="text-3xl font-bold text-primary">
-                    ${(product.price - product.discountValue).toFixed(2)}
-                  </div>
-                  <div className="text-sm text-green-600">
-                    Economia de ${product.discountValue.toFixed(2)}
-                  </div>
+                <div className="space-y-2">
+                  {product.discountValue ? (
+                    <div className="flex items-center gap-3 w-full">
+                      <div className="text-[24px] font-medium text-neutral line-through">
+                        ${product?.price?.toFixed(2)}
+                      </div>
+
+                      <div className="text-[28px] font-bold text-destructive">
+                        ${(product.price - product.discountValue).toFixed(2)}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="text-3xl font-bold text-neutral">
+                      ${product.price?.toFixed(2)}
+                    </div>
+                  )}
                 </div>
-              ) : (
-                <div className="text-3xl font-bold text-primary">
-                  ${product.price?.toFixed(2)}
-                </div>
-              )}
-            </div>
+              </div>
 
-            <div className="flex items-center space-x-2">
-              <div
-                className={`w-3 h-3 rounded-full ${
-                  product.available ? "bg-green-500" : "bg-red-500"
-                }`}
-              ></div>
-              <span
-                className={`text-sm ${
-                  product.available ? "text-green-600" : "text-red-600"
-                }`}
-              >
-                {product.available ? "Em estoque" : "Indisponível"}
-              </span>
-            </div>
+              <div className="flex flex-col gap-2 mb-8">
+                {product.material && (
+                  <div className="flex items-center gap-1">
+                    <div className="flex items-center space-x-2">
+                      <Package className="h-4 w-4 text-gray-600" />
+                      <span className="text-sm font-semibold text-foreground-secondary">
+                        Material:
+                      </span>
+                    </div>
+                    <p className="text-foreground-secondary">
+                      {product.material}
+                    </p>
+                  </div>
+                )}
 
-            {product.material && (
-              <div className="space-y-2">
                 <div className="flex items-center space-x-2">
-                  <Package className="h-4 w-4 text-gray-600" />
-                  <span className="text-sm font-medium text-gray-900">
-                    Material
+                  <div
+                    className={`w-3 h-3 rounded-full ${
+                      product.available ? "bg-green-500" : "bg-red-500"
+                    }`}
+                  ></div>
+                  <span
+                    className={`text-sm ${
+                      product.available ? "text-green-600" : "text-red-600"
+                    }`}
+                  >
+                    {product.available ? "Em estoque" : "Indisponível"}
                   </span>
                 </div>
-                <p className="text-gray-700 pl-6">{product.material}</p>
               </div>
-            )}
+            </div>
 
             <Button
               onClick={handleAddToCart}
@@ -152,22 +172,6 @@ export const ProductPage = ({ productId, provider }: ProductPageProps) => {
             </Button>
           </div>
         </div>
-
-        {product.description && (
-          <div className="bg-gray-50 rounded-lg p-6">
-            <div className="flex items-center space-x-2 mb-4">
-              <FileText className="h-5 w-5 text-gray-600" />
-              <h2 className="text-xl font-semibold text-gray-900">
-                Descrição do Produto
-              </h2>
-            </div>
-            <div className="prose prose-gray max-w-none">
-              <p className="text-gray-700 leading-relaxed whitespace-pre-line">
-                {product.description}
-              </p>
-            </div>
-          </div>
-        )}
       </div>
     </PageLayout>
   );

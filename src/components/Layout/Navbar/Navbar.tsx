@@ -17,8 +17,10 @@ export const Navbar = () => {
       <div className="flex w-full max-w-[1324px] items-center justify-between md:px-0 px-4">
         <div className="flex items-center gap-10">
           <div className="flex gap-4 items-center">
-            <img src={logo} alt="Logo" className="h-10 w-10 object-contain" />
+            <a href="/" className="cursor-pointer flex items-center">
+              <img src={logo} alt="Logo" className="h-10 w-10 object-contain" />
             <h1 className="font-semibold text-3xl">SHOPPER</h1>
+            </a>
           </div>
           <Input
             id="partySearch"

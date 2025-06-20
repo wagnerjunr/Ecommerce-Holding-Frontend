@@ -1,7 +1,6 @@
-import React from 'react';
 import { ProductPage } from './ProductPage';
 
-export const ProductPageWrapper: React.FC = () => {
+export const ProductPageWrapper = () => {
   const pathParts = window.location.pathname.split('/');
   const provider = pathParts[2]; 
   const productId = pathParts[3];
