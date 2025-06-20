@@ -26,6 +26,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { HomePage } from "./Pages/Home/HomePage.tsx";
 import LoginPage from './Pages/Auth/Login.tsx'
 import RegisterPage from './Pages/Auth/Register.tsx'
+import { ProductPageWrapper } from './Pages/Product/ProductPageWrapper.tsx'
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -47,10 +48,10 @@ const router = createBrowserRouter([
         path: "/register",
         element: <RegisterPage />,
       },
-      // {
-      //   path: "/film/:id",
-      //   element: <FilmPage/>,
-      // },
+      {
+        path: "/product/:provider/:id",
+        element: <ProductPageWrapper />,
+      },
     ],
   },
 ]);

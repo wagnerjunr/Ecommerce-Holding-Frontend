@@ -17,24 +17,36 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const productName =
     product.name.charAt(0).toUpperCase() + product.name.slice(1);
 
-    const handleAddToCart = () => {
-      addToCart(product);
-      openCartDrawer();
-    }
+  const handleAddToCart = () => {
+    addToCart(product);
+    openCartDrawer();
+  };
+
+  const handleProductClick = () => {
+    window.location.href = `/product/${product.provider}/${product.id}`;
+  };
 
   return (
     <Card className="h-full flex flex-col gap-4">
       <CardHeader>
         {product.image && (
-          <div className="aspect-square overflow-hidden rounded-md mb-4">
+          <div 
+            className="aspect-square overflow-hidden rounded-md mb-4 cursor-pointer"
+            onClick={handleProductClick}
+          >
             <img
               src={product.image}
               alt={productName}
-              className="w-full h-full object-cover transition-transform cursor-pointer hover:scale-105 duration-300"
+              className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
             />
           </div>
         )}
-        <CardTitle className="text-lg line-clamp-2">{productName}</CardTitle>
+        <CardTitle 
+          className="text-lg line-clamp-2 cursor-pointer hover:text-primary transition-colors"
+          onClick={handleProductClick}
+        >
+          {productName}
+        </CardTitle>
         <Badge variant="secondary" className="w-fit">
           {product.provider}
         </Badge>
@@ -48,7 +60,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </div>
 
             <div className="text-[20px] font-bold text-primary">
-              ${(product.price * (1 - product.discountValue)).toFixed(2)}
+              ${(product.price - product.discountValue).toFixed(2)}
             </div>
           </div>
         ) : (
