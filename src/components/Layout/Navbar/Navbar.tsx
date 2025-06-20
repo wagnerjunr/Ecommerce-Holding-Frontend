@@ -1,16 +1,16 @@
-import { Button } from "../../ui/button";
-import { Input } from "../../ui/input";
-import { ShoppingCart } from "lucide-react";
-import logo from "./logo.png";
-import useCartStore from "@/store/cartStore";
-import useDrawerStore from "@/store/drawerStore";
-import useUserStore from "@/store/userStore";
-import { UserButton } from "@/components/User/UserButton";
+import { Button } from "../../ui/button"
+import { ShoppingCart } from "lucide-react"
+import logo from "./logo.png"
+import useCartStore from "@/store/cartStore"
+import useDrawerStore from "@/store/drawerStore"
+import useUserStore from "@/store/userStore"
+import { UserButton } from "@/components/User/UserButton"
+import { ProductSearchPopover } from "@/components/Search/ProductSearchPopover"
 
 export const Navbar = () => {
-  const { user, isAuthenticated } = useUserStore();
-  const { itemCount } = useCartStore();
-  const { openCartDrawer } = useDrawerStore();
+  const { user, isAuthenticated } = useUserStore()
+  const { itemCount } = useCartStore()
+  const { openCartDrawer } = useDrawerStore()
 
   return (
     <nav className="min-h-[80px] max-h-[80px] min-w-full border-b flex items-center justify-center fixed top-0 bg-background backdrop-blur-xl z-30">
@@ -19,16 +19,24 @@ export const Navbar = () => {
           <div className="flex gap-4 items-center">
             <a href="/" className="cursor-pointer flex items-center">
               <img src={logo} alt="Logo" className="h-10 w-10 object-contain" />
-            <h1 className="font-semibold text-3xl">SHOPPER</h1>
+              <h1 className="font-semibold text-3xl">SHOPPER</h1>
             </a>
           </div>
-          <Input
-            id="partySearch"
+          
+          <ProductSearchPopover 
             placeholder="Procurar por Produto"
-            className="h-9 w-[550px] hidden md:block rounded-[41px]"
+            className="h-9 w-[550px] hidden md:block"
           />
         </div>
+        
         <div className="flex items-center gap-8">
+          <div className="md:hidden">
+            <ProductSearchPopover 
+              placeholder="Pesquisar..."
+              className="h-9 w-[200px]"
+            />
+          </div>
+          
           <div className="relative">
             <Button
               className="h-fit rounded-2xl p-3 cursor-pointer"
@@ -55,5 +63,5 @@ export const Navbar = () => {
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
