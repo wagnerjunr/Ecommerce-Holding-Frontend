@@ -11,6 +11,13 @@ export interface Product {
   discountValue?:number;
 }
 
+export interface Users {
+  id: string;
+  name: string;
+  email: string;
+  order: Order[];
+}
+
 export interface CartItem extends Product {
   quantity: number;
 }

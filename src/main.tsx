@@ -24,6 +24,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 )
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { HomePage } from "./Pages/Home/HomePage.tsx";
+import LoginPage from './Pages/Auth/Login.tsx'
+import RegisterPage from './Pages/Auth/Register.tsx'
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -36,6 +38,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/register",
+        element: <RegisterPage />,
       },
       // {
       //   path: "/film/:id",

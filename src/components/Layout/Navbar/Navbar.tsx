@@ -1,18 +1,19 @@
 import { Button } from "../../ui/button";
 import { Input } from "../../ui/input";
-import { MessageCircleMore, ShoppingCart } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import logo from "./logo.png";
 import useCartStore from "@/store/cartStore";
 import useDrawerStore from "@/store/drawerStore";
+import useUserStore from "@/store/userStore";
+import { UserButton } from "@/components/User/UserButton";
 
 export const Navbar = () => {
-  const user = false;
+  const { user, isAuthenticated } = useUserStore();
   const { itemCount } = useCartStore();
   const { openCartDrawer } = useDrawerStore();
 
   return (
     <nav className="min-h-[80px] max-h-[80px] min-w-full border-b flex items-center justify-center fixed top-0 bg-background backdrop-blur-xl z-30">
-      {/* <SyncAuthStore user={user || null} /> */}
       <div className="flex w-full max-w-[1324px] items-center justify-between md:px-0 px-4">
         <div className="flex items-center gap-10">
           <div className="flex gap-4 items-center">
@@ -40,15 +41,9 @@ export const Navbar = () => {
             </span>
           </div>
 
-          {user ? (
+          {isAuthenticated && user ? (
             <div className="flex items-center gap-6">
-              <a href="/direct">
-                <Button className="h-fit rounded-2xl">
-                  <MessageCircleMore />
-                  Mensagens
-                </Button>
-              </a>
-              {/* <UserButton user={user} /> */}
+              <UserButton />
             </div>
           ) : (
             <>

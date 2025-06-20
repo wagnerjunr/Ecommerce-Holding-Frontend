@@ -11,6 +11,8 @@ export const ProductBanner = () => {
 
   const bannerProducts = products?.slice(0, 5) || [];
 
+  console.log(bannerProducts);
+
   useEffect(() => {
     if (!isAutoPlaying || bannerProducts.length === 0) return;
 
