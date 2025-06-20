@@ -18,6 +18,22 @@ export interface Users {
   order: Order[];
 }
 
+export interface Address {
+  id: string;
+  userId: string;
+  street: string;
+  city: string;
+  state: string;
+  neighborhood: string;
+  number: string;
+  complement?: string;
+  zipCode: string;
+  createdAt: string;
+  updatedAt: string;
+  user?: Users;
+  orders?: Order[];
+}
+
 export interface CartItem extends Product {
   quantity: number;
 }
@@ -37,6 +53,10 @@ export interface Order {
   status: string;
   createdAt: string;
   items: OrderItem[];
+  addressId: string;
+  userId: string;
+  address?: Address;
+  user?: Users;
 }
 
 export interface CreateOrderDto {

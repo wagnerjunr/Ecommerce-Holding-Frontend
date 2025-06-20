@@ -10,10 +10,17 @@ import {
 import { Button } from "@/components/ui/button";
 import useDrawerStore from "@/store/drawerStore";
 import useCartStore from "@/store/cartStore";
+import { useNavigate } from "react-router-dom";
 
 export default function CartDrawer() {
+  const navigate = useNavigate();
   const { isCartDrawerOpen, closeCartDrawer } = useDrawerStore();
   const { items, total, removeFromCart, updateQuantity, clearCart } = useCartStore();
+
+  const handleCheckout = () => {
+    closeCartDrawer();
+    navigate('/checkout');
+  };
 
   return (
     <Drawer direction="right" open={isCartDrawerOpen} onOpenChange={closeCartDrawer}>
@@ -40,6 +47,7 @@ export default function CartDrawer() {
                       className="w-16 h-16 object-cover rounded"
                     />
                   )}
+                  
                   <div className="flex-1">
                     <h3 className="font-medium">{item.name}</h3>
                     <p className="text-sm text-gray-500">R$ {item.price.toFixed(2)}</p>
@@ -51,7 +59,7 @@ export default function CartDrawer() {
                       >
                         -
                       </Button>
-                      <span className="px-2">{item.quantity}</span>
+                      <span className="px-3 py-1 bg-gray-100 rounded">{item.quantity}</span>
                       <Button 
                         size="sm" 
                         variant="outline"
@@ -76,8 +84,8 @@ export default function CartDrawer() {
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-lg font-semibold">Total: R$ {total.toFixed(2)}</span>
                 </div>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   onClick={clearCart}
                   className="w-full mb-2"
                 >
@@ -97,7 +105,10 @@ export default function CartDrawer() {
             Continuar comprando
           </Button>
           {items.length > 0 && (
-            <Button className="rounded-[8px] px-4 py-2 h-fit bg-blue-600/80">
+            <Button 
+              className="rounded-[8px] px-4 py-2 h-fit bg-blue-600/80 hover:bg-blue-700"
+              onClick={handleCheckout}
+            >
               Finalizar compra
             </Button>
           )}

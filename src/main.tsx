@@ -27,6 +27,8 @@ import { HomePage } from "./Pages/Home/HomePage.tsx";
 import LoginPage from './Pages/Auth/Login.tsx'
 import RegisterPage from './Pages/Auth/Register.tsx'
 import { ProductPageWrapper } from './Pages/Product/ProductPageWrapper.tsx'
+import { OrderSuccessPage } from './Pages/Checkout/SucessPage/SuccessPage.tsx'
+import { CheckoutPage } from './Pages/Checkout/CheckoutPage.tsx'
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -51,6 +53,14 @@ const router = createBrowserRouter([
       {
         path: "/product/:provider/:id",
         element: <ProductPageWrapper />,
+      },
+      {
+        path: "/checkout",
+        element: <CheckoutPage />,
+      },
+      {
+        path: "/order-success",
+        element: <OrderSuccessPage />,
       },
     ],
   },
