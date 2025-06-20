@@ -34,7 +34,7 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
                 <p className="font-medium text-sm">{item.name}</p>
                 <p className="text-xs text-gray-500">Qtd: {item.quantity}</p>
               </div>
-              <p className="font-medium">R$ {(item.price * item.quantity).toFixed(2)}</p>
+              <p className="font-medium">R$ {(item.price * item.quantity)}</p>
             </div>
           ))}
         </div>
@@ -44,7 +44,7 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
         <div className="space-y-2">
           <div className="flex justify-between">
             <span>Subtotal:</span>
-            <span>R$ {total.toFixed(2)}</span>
+            <span>R$ {total}</span>
           </div>
           <div className="flex justify-between">
             <span>Frete:</span>
@@ -53,7 +53,7 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
           <Separator />
           <div className="flex justify-between font-bold text-lg">
             <span>Total:</span>
-            <span>R$ {total.toFixed(2)}</span>
+            <span>R$ {total}</span>
           </div>
         </div>
 

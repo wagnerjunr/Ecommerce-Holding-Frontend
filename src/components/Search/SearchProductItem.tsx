@@ -39,12 +39,12 @@ export const SearchProductItem = ({ product, onProductClick }: SearchProductItem
         </p>
         <div className="flex items-center gap-2 mt-1">
           <span className="font-semibold text-sm">
-            R$ {discountedPrice.toFixed(2)}
+            R$ {discountedPrice}
           </span>
           {product.discountValue  && (
             <>
               <span className="text-xs text-gray-500 line-through">
-                R$ {product.price.toFixed(2)}
+                R$ {product.price}
               </span>
               <Badge variant="destructive" className="text-xs px-1 py-0">
                 -{product.discountValue}%

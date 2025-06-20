@@ -18,8 +18,8 @@ export const UserButton = () => {
 
   const { mutateAsync } = useLogoutUser()
   
-  const handleGoToProfile = () => {
-    window.location.href = '/profile';
+  const handleOrdersUser = () => {
+    window.location.href = '/orders';
   };
   
   const handleLogout = async () => {
@@ -44,8 +44,8 @@ export const UserButton = () => {
         <DropdownMenuSeparator />
 
         <DropdownMenuItem 
-          className="hover:bg-surface-off"
-          onClick={handleGoToProfile}
+          className="hover:bg-surface-off cursor-pointer"
+          onClick={handleOrdersUser}
         >
           <User height={18} />
           Historico de Compras
@@ -54,7 +54,7 @@ export const UserButton = () => {
         <DropdownMenuSeparator />
 
         <DropdownMenuItem
-          className="hover:bg-surface-off"
+          className="hover:bg-surface-off cursor-pointer"
           onClick={handleLogout}
         >
           <DoorOpen height={18} />

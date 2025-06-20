@@ -93,10 +93,10 @@ export const ProductBanner = () => {
               {currentProduct.discountValue ? (
                 <>
                   <span className="text-3xl font-bold text-green-400">
-                    R$ {(currentProduct.price - currentProduct.discountValue).toFixed(2)}
+                    R$ {(currentProduct.price - currentProduct.discountValue)}
                   </span>
                   <span className="text-xl text-gray-300 line-through">
-                    R$ {currentProduct.price.toFixed(2)}
+                    R$ {currentProduct.price}
                   </span>
                   <Badge className="bg-red-500 text-white">
                     -{Math.round((currentProduct.discountValue / currentProduct.price) * 100)}%
@@ -104,14 +104,14 @@ export const ProductBanner = () => {
                 </>
               ) : (
                 <span className="text-3xl font-bold text-white">
-                  R$ {currentProduct.price.toFixed(2)}
+                  R$ {currentProduct.price}
                 </span>
               )}
             </div>
 
             <Button 
               size="lg" 
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg font-semibold transition-all duration-300 transform hover:scale-105"
+              className="bg-primary hover:bg-blue-500 text-white px-8 py-3 text-lg font-semibold transition-all duration-300 transform hover:scale-102"
               disabled={!currentProduct.available}
             >
               <ShoppingCart className="mr-2 h-5 w-5" />

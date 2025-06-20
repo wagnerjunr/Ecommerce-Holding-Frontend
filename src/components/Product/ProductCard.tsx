@@ -56,16 +56,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         {product.discountValue ? (
           <div className="flex items-center gap-3 w-full">
             <div className="text-[20px] font-bold text-primary line-through">
-              ${product?.price?.toFixed(2)}
+              R${product?.price}
             </div>
 
             <div className="text-[20px] font-bold text-primary">
-              ${(product.price - product.discountValue).toFixed(2)}
+              R${(product.price - product.discountValue)}
             </div>
           </div>
         ) : (
           <div className="text-[20px] font-bold text-primary w-full">
-            ${product?.price?.toFixed(2)}
+            R${product?.price}
           </div>
         )}
 

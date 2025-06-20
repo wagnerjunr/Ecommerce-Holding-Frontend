@@ -50,7 +50,7 @@ export default function CartDrawer() {
                   
                   <div className="flex-1">
                     <h3 className="font-medium">{item.name}</h3>
-                    <p className="text-sm text-gray-500">R$ {item.price.toFixed(2)}</p>
+                    <p className="text-sm text-gray-500">R$ {item.price}</p>
                     <div className="flex items-center gap-2 mt-2">
                       <Button 
                         size="sm" 
@@ -82,7 +82,7 @@ export default function CartDrawer() {
               
               <div className="border-t pt-4">
                 <div className="flex justify-between items-center mb-4">
-                  <span className="text-lg font-semibold">Total: R$ {total.toFixed(2)}</span>
+                  <span className="text-lg font-semibold">Total: R$ {total}</span>
                 </div>
                 <Button
                   variant="outline"

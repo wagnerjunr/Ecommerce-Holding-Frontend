@@ -81,7 +81,7 @@ export const OrderSuccessPage = () => {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Valor total:</span>
-                  <span className="font-semibold text-green-600">R$ {orderData.total.toFixed(2)}</span>
+                  <span className="font-semibold text-green-600">R$ {orderData.total}</span>
                 </div>
               </div>
             </div>
