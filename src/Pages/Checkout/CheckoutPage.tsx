@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { CheckoutProgress } from "@/components/Checkout/CheckoutProgress";
 import { PersonalDataStep } from "@/components/Checkout/PersonalDataStep";
 import { AddressStep } from "@/components/Checkout/AddressStep";
@@ -22,6 +23,10 @@ export const CheckoutPage = () => {
     handleFinishOrder,
     navigate,
   } = useCheckout();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   if (items.length === 0) {
     return <EmptyCart onContinueShopping={() => navigate("/")} />;

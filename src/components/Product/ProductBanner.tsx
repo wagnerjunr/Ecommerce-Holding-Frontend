@@ -86,7 +86,7 @@ export const ProductBanner = () => {
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url(${currentProduct.image})`,
         }}
       >
-        <div className="absolute inset-0 flex items-center justify-between p-8 px-20">
+        <div className="absolute inset-0 flex items-center justify-between p-8 md:px-20">
           <div className="text-white max-w-md space-y-4">
             <Badge variant="secondary" className="w-fit">
               {currentProduct.provider}
@@ -102,10 +102,11 @@ export const ProductBanner = () => {
               {currentProduct.discountValue ? (
                 <>
                   <span className="text-2xl text-gray-300 line-through">
-                    R$ {currentProduct.price},00
+                    R$ {currentProduct.price}
                   </span>
                   <span className="text-3xl font-bold text-white">
-                    R$ {currentProduct.price - currentProduct.discountValue},00
+                    R${" "}
+                    {currentProduct.price * (1 - currentProduct.discountValue)}
                   </span>
                   <Badge variant="destructive" className="text-sm">
                     -
@@ -118,7 +119,7 @@ export const ProductBanner = () => {
                 </>
               ) : (
                 <span className="text-3xl font-bold text-white">
-                  R$ {currentProduct.price},00
+                  R$ {currentProduct.price}
                 </span>
               )}
             </div>

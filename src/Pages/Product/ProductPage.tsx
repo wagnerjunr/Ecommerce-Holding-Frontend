@@ -114,16 +114,16 @@ export const ProductPage = ({ productId, provider }: ProductPageProps) => {
                   {product.discountValue ? (
                     <div className="flex items-center gap-3 w-full">
                       <div className="text-[24px] font-medium text-neutral line-through">
-                        R${product?.price},00
+                        R${product?.price}
                       </div>
 
                       <div className="text-[28px] font-bold text-destructive">
-                        R${product.price - product.discountValue},00
+                        R${product.price * (1 - product.discountValue)}
                       </div>
                     </div>
                   ) : (
                     <div className="text-3xl font-bold text-neutral">
-                      R${product.price},00
+                      R${product.price}
                     </div>
                   )}
                 </div>

@@ -13,8 +13,8 @@ export const Navbar = () => {
   const { openCartDrawer } = useDrawerStore()
 
   return (
-    <nav className="min-h-[80px] max-h-[80px] min-w-full border-b flex items-center justify-center fixed top-0 bg-background backdrop-blur-xl z-30">
-      <div className="flex md:flex-row flex-col w-full max-w-[1324px] md:items-center md:justify-between md:px-0 px-4">
+    <nav className="min-h-[80px] md:max-h-[80px] max-h-[150px] min-w-full border-b flex items-center justify-center fixed top-0 bg-background backdrop-blur-xl z-30">
+      <div className="flex md:flex-row flex-col w-full max-w-[1324px] md:items-center md:justify-between md:px-0 px-4 md:pt-0 pt-4">
         <div className="flex items-center gap-10">
           <div className="flex gap-4 items-center">
             <a href="/" className="cursor-pointer flex items-center">

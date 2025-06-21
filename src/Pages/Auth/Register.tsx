@@ -1,43 +1,41 @@
-'use client'
+"use client";
 
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { useRegisterUser } from '@/hooks/Auth/useRegisterUser'
-import { ArrowBigLeft } from 'lucide-react'
-import { useState } from 'react'
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useRegisterUser } from "@/hooks/Auth/useRegisterUser";
+import { ArrowBigLeft } from "lucide-react";
+import { useState } from "react";
 
 export default function RegisterPage() {
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-  const [confirmPassword, setConfirmPassword] = useState<string>('')
-  const [name, setName] = useState<string>('')
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [name, setName] = useState<string>("");
 
-  const { mutateAsync: registerUser, isPending } = useRegisterUser()
+  const { mutateAsync: registerUser, isPending } = useRegisterUser();
 
-  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const handleRegister = async () => {
-    if (!isValidEmail) return
+    if (!isValidEmail) return;
 
-    const res = await registerUser({
+    await registerUser({
       data: {
         email,
         password,
         name,
       },
-    })
-    if (res) {
-      window.location.href = '/login'
-    }
-  }
+    });
+    window.location.href = "/login";
+  };
 
   const handleGoBack = () => {
-    window.history.back()
-  }
+    window.history.back();
+  };
 
   const handleGoToLogin = () => {
-    window.location.href = '/login'
-  }
+    window.location.href = "/login";
+  };
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-start md:justify-center">
@@ -131,11 +129,11 @@ export default function RegisterPage() {
             onClick={handleGoToLogin}
             className="hover:underline text-primary cursor-pointer"
           >
-            {' '}
+            {" "}
             Entrar
           </span>
         </p>
       </div>
     </main>
-  )
+  );
 }

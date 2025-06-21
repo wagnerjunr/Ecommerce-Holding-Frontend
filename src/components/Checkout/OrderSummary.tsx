@@ -1,8 +1,8 @@
-import React from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import type { CartItem } from '@/store/cartStore';
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import type { CartItem } from "@/store/cartStore";
 
 interface OrderSummaryProps {
   items: CartItem[];
@@ -19,7 +19,7 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
   currentStep,
   canFinishOrder,
   isProcessing,
-  onFinishOrder
+  onFinishOrder,
 }) => {
   return (
     <Card className="sticky top-4  w-[350px]">
@@ -34,13 +34,19 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
                 <p className="font-medium text-sm">{item.name}</p>
                 <p className="text-xs text-gray-500">Qtd: {item.quantity}</p>
               </div>
-              <p className="font-medium">R$ {(item.price * item.quantity)}</p>
+              {item.discountValue ? (
+                <p className="text-sm text-neutral">
+                  R$ {item.price * (1 - item.discountValue)}
+                </p>
+              ) : (
+                <p className="text-sm text-neutral">R$ {item.price}</p>
+              )}{" "}
             </div>
           ))}
         </div>
-        
+
         <Separator />
-        
+
         <div className="space-y-2">
           <div className="flex justify-between">
             <span>Subtotal:</span>
@@ -58,7 +64,7 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
         </div>
 
         {currentStep === 3 && canFinishOrder && (
-          <Button 
+          <Button
             onClick={onFinishOrder}
             disabled={isProcessing}
             className="w-full"
@@ -70,7 +76,7 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
                 Processando...
               </div>
             ) : (
-              'Finalizar Pedido'
+              "Finalizar Pedido"
             )}
           </Button>
         )}

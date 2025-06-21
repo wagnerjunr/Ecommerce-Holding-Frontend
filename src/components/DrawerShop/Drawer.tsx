@@ -11,12 +11,15 @@ import { Button } from "@/components/ui/button";
 import useDrawerStore from "@/store/drawerStore";
 import useCartStore from "@/store/cartStore";
 import { useNavigate } from "react-router-dom";
+import { useMediaQuery } from "@/lib/utils";
 
 export default function CartDrawer() {
   const navigate = useNavigate();
   const { isCartDrawerOpen, closeCartDrawer } = useDrawerStore();
   const { items, total, removeFromCart, updateQuantity, clearCart } =
     useCartStore();
+
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const handleCheckout = () => {
     closeCartDrawer();
@@ -25,7 +28,7 @@ export default function CartDrawer() {
 
   return (
     <Drawer
-      direction="right"
+      direction={isDesktop ? "right" : "bottom"}
       open={isCartDrawerOpen}
       onOpenChange={closeCartDrawer}
     >
@@ -58,7 +61,13 @@ export default function CartDrawer() {
 
                   <div className="flex-1">
                     <h3 className="font-medium">{item.name}</h3>
-                    <p className="text-sm text-gray-500">R$ {item.price}</p>
+                    {item.discountValue ? (
+                      <p className="text-sm text-gray-500">
+                        R$ {item.price * (1 - item.discountValue)}
+                      </p>
+                    ) : (
+                      <p className="text-sm text-gray-500">R$ {item.price}</p>
+                    )}
                     <div className="flex items-center gap-2 mt-2">
                       <Button
                         size="sm"

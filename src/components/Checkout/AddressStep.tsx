@@ -56,9 +56,9 @@ export const AddressStep: React.FC<AddressStepProps> = ({
 
   const handleAddressCreated = (newAddress: Address) => {
     setShowCreateForm(false);
+    refetch(); 
     setSelectedAddressId(newAddress.id);
     updateFormWithAddress(newAddress);
-    refetch(); 
   };
 
   const handleNext = () => {
@@ -92,6 +92,7 @@ export const AddressStep: React.FC<AddressStepProps> = ({
       <CreateAddressForm
         onAddressCreated={handleAddressCreated}
         onCancel={() => setShowCreateForm(false)}
+        setSelectedAddressId={setSelectedAddressId}
       />
     );
   }

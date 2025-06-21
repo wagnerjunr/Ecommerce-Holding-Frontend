@@ -43,6 +43,12 @@ export interface OrderItem {
   name: string;
   price: number;
   quantity: number;
+  image:string;
+  description:string;
+  material:string;
+  provider:string;
+  available:boolean;
+  discountValue?:number;
 }
 
 export interface Order {

@@ -60,12 +60,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </div>
 
             <div className="text-[20px] font-bold text-destructive">
-              R${(product.price - product.discountValue)}
+              R${(product.price * (1 - product.discountValue))}
             </div>
           </div>
         ) : (
           <div className="text-[20px] font-bold text-neutral w-full">
-            R${product?.price},00
+            R${product?.price}
           </div>
         )}
 

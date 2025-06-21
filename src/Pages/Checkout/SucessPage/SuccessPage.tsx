@@ -8,12 +8,10 @@ interface OrderState {
   total: number;
   items: number;
 }export interface CheckoutForm {
-  // Dados pessoais
   fullName: string;
   email: string;
   phone: string;
   
-  // Endereço
   zipCode: string;
   street: string;
   number: string;
@@ -22,7 +20,6 @@ interface OrderState {
   city: string;
   state: string;
   
-  // Pagamento
   cardNumber: string;
   cardName: string;
   expiryDate: string;
@@ -58,7 +55,7 @@ export const OrderSuccessPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 py-8 mt-24">
       <div className="max-w-2xl mx-auto px-4">
         <Card className="text-center">
           <CardHeader className="pb-4">

@@ -40,6 +40,7 @@ export const PaymentStep: React.FC<PaymentStepProps> = ({
           <Label htmlFor="cardName">Nome no Cartão</Label>
           <Input
             id="cardName"
+            type='text'
             value={formData.cardName}
             onChange={(e) => onInputChange('cardName', e.target.value.toUpperCase())}
             placeholder="NOME COMO NO CARTÃO"

@@ -17,6 +17,8 @@ export const OrderHistoryPage = () => {
   const {user} = useUserStore()
   const { data: orders, isLoading, error } = useGetAllOrdersByUserId();
 
+  console.log(orders)
+
   const handleReorder = (order: Order) => {
     if (!order.items || order.items.length === 0) {
       toast.error('Não é possível refazer este pedido', {
@@ -32,11 +34,12 @@ export const OrderHistoryPage = () => {
         price: item.price,
         quantity: item.quantity,
         externalId: item.productId,
-        provider: 'unknown', 
+        provider: item.provider, 
         available: true,
-        image: '',
-        description: '',
-        material: ''
+        image: item.image,
+        description: item.description,
+        material: item.material,
+        discountValue:item.discountValue
       };
       
       addToCart(cartItem);
@@ -227,10 +230,16 @@ export const OrderHistoryPage = () => {
                           </div>
                           <div className="text-right">
                             <p className="font-medium">
-                              R$ {(item.price * item.quantity)}
+                              R$ {(item.discountValue 
+                                ? (item.price * (1 - item.discountValue) * item.quantity)
+                                : (item.price * item.quantity)
+                              )}
                             </p>
                             <p className="text-sm text-gray-600">
-                              R$ {(item.price)} cada
+                              R$ {(item.discountValue 
+                                ? (item.price * (1 - item.discountValue))
+                                : item.price
+                              )} cada
                             </p>
                           </div>
                         </div>

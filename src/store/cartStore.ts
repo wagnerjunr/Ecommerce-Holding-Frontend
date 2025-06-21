@@ -1,13 +1,6 @@
+import type { Product } from '@/types';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-
-export interface Product {
-  id: string;
-  name: string;
-  price: number;
-  image?: string;
-  description?: string;
-}
 
 export interface CartItem extends Product {
   quantity: number;
@@ -31,12 +24,10 @@ type CartStore = CartState & CartActions;
 const useCartStore = create<CartStore>()(devtools(
   persist(
     (set, get) => ({
-      // Estado inicial
       items: [],
       total: 0,
       itemCount: 0,
 
-      // Ações
       addToCart: (product: Product) => {
         const { items } = get();
         const existingItem = items.find(item => item.id === product.id);
@@ -53,7 +44,10 @@ const useCartStore = create<CartStore>()(devtools(
           newItems = [...items, { ...product, quantity: 1 }];
         }
         
-        const total = newItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const total = newItems.reduce((sum, item) => {
+          const price = item.discountValue ? item.price * (1 - item.discountValue) : item.price;
+          return sum + price * item.quantity;
+        }, 0);
         const itemCount = newItems.reduce((sum, item) => sum + item.quantity, 0);
         
         set({ items: newItems, total, itemCount }, false, 'addToCart');
@@ -63,7 +57,10 @@ const useCartStore = create<CartStore>()(devtools(
         const { items } = get();
         const newItems = items.filter(item => item.id !== productId);
         
-        const total = newItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const total = newItems.reduce((sum, item) => {
+          const price = item.discountValue ? item.price * (1 - item.discountValue) : item.price;
+          return sum + price * item.quantity;
+        }, 0);
         const itemCount = newItems.reduce((sum, item) => sum + item.quantity, 0);
         
         set({ items: newItems, total, itemCount }, false, 'removeFromCart');
@@ -77,7 +74,10 @@ const useCartStore = create<CartStore>()(devtools(
             : item
         ).filter(item => item.quantity > 0);
         
-        const total = newItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const total = newItems.reduce((sum, item) => {
+          const price = item.discountValue ? item.price * (1 - item.discountValue) : item.price;
+          return sum + price * item.quantity;
+        }, 0);
         const itemCount = newItems.reduce((sum, item) => sum + item.quantity, 0);
         
         set({ items: newItems, total, itemCount }, false, 'updateQuantity');
@@ -88,19 +88,17 @@ const useCartStore = create<CartStore>()(devtools(
       },
     }),
     {
-      name: 'cart-storage', // Nome da chave no localStorage
-      // Opcional: configurações adicionais
+      name: 'cart-storage', 
       partialize: (state) => ({
         items: state.items,
         total: state.total,
         itemCount: state.itemCount,
       }),
-      // Opcional: versão para migração de dados
       version: 1,
     }
   ),
   {
-    name: 'cart-store', // Nome para o devtools
+    name: 'cart-store', 
   }
 ));
 

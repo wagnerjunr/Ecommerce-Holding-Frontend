@@ -12,6 +12,7 @@ import type { Address } from '@/types';
 interface CreateAddressFormProps {
   onAddressCreated: (address: Address) => void;
   onCancel: () => void;
+  setSelectedAddressId: (id: string) => void;
 }
 
 interface AddressFormData {
@@ -26,7 +27,8 @@ interface AddressFormData {
 
 export const CreateAddressForm: React.FC<CreateAddressFormProps> = ({
   onAddressCreated,
-  onCancel
+  onCancel,
+  setSelectedAddressId
 }) => {
   const [formData, setFormData] = useState<AddressFormData>({
     street: '',
@@ -96,7 +98,7 @@ export const CreateAddressForm: React.FC<CreateAddressFormProps> = ({
     try {
       const result = await createAddress.mutateAsync({ data: formData });
       onAddressCreated(result);
-      toast.success('Endereço criado com sucesso!');
+      setSelectedAddressId(result.id);
     } catch (error) {
       console.error('Erro ao criar endereço:', error);
     }
