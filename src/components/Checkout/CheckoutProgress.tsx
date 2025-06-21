@@ -12,7 +12,6 @@ export const CheckoutProgress: React.FC<CheckoutProgressProps> = ({
   onStepClick
 }) => {
   const handleStepClick = (step: number) => {
-    // Só permite navegar para steps anteriores ou o atual
     if (step <= currentStep && onStepClick) {
       onStepClick(step);
     }

@@ -1,10 +1,8 @@
 export interface CheckoutForm {
-  // Dados pessoais
   fullName: string;
   email: string;
   phone: string;
   
-  // Endereço
   zipCode: string;
   street: string;
   number: string;
@@ -13,7 +11,6 @@ export interface CheckoutForm {
   city: string;
   state: string;
   
-  // Pagamento
   cardNumber: string;
   cardName: string;
   expiryDate: string;
