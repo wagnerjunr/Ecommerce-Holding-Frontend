@@ -15,15 +15,20 @@ import { useNavigate } from "react-router-dom";
 export default function CartDrawer() {
   const navigate = useNavigate();
   const { isCartDrawerOpen, closeCartDrawer } = useDrawerStore();
-  const { items, total, removeFromCart, updateQuantity, clearCart } = useCartStore();
+  const { items, total, removeFromCart, updateQuantity, clearCart } =
+    useCartStore();
 
   const handleCheckout = () => {
     closeCartDrawer();
-    navigate('/checkout');
+    navigate("/checkout");
   };
 
   return (
-    <Drawer direction="right" open={isCartDrawerOpen} onOpenChange={closeCartDrawer}>
+    <Drawer
+      direction="right"
+      open={isCartDrawerOpen}
+      onOpenChange={closeCartDrawer}
+    >
       <DrawerContent className="md:inset-x-auto md:right-0 md:mt-0 md:h-screen md:w-[500px]">
         <DrawerHeader className="flex justify-between px-6 pb-7">
           <DrawerTitle className="text-lg font-semibold">
@@ -39,36 +44,48 @@ export default function CartDrawer() {
           ) : (
             <div className="space-y-4">
               {items.map((item) => (
-                <div key={item.id} className="flex items-center gap-4 p-4 border rounded-lg">
+                <div
+                  key={item.id}
+                  className="flex items-center gap-4 p-4 border rounded-lg"
+                >
                   {item.image && (
-                    <img 
-                      src={item.image} 
-                      alt={item.name} 
+                    <img
+                      src="/ImagemTeste.webp"
+                      alt={item.name}
                       className="w-16 h-16 object-cover rounded"
                     />
                   )}
-                  
+
                   <div className="flex-1">
                     <h3 className="font-medium">{item.name}</h3>
                     <p className="text-sm text-gray-500">R$ {item.price}</p>
                     <div className="flex items-center gap-2 mt-2">
-                      <Button 
-                        size="sm" 
+                      <Button
+                        size="sm"
                         variant="outline"
-                        onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - 1))}
+                        onClick={() =>
+                          updateQuantity(
+                            item.id,
+                            Math.max(0, item.quantity - 1)
+                          )
+                        }
                       >
                         -
                       </Button>
-                      <span className="px-3 py-1 bg-gray-100 rounded">{item.quantity}</span>
-                      <Button 
-                        size="sm" 
+                      <span className="px-3 py-1 bg-gray-100 rounded">
+                        {item.quantity}
+                      </span>
+                      <Button
+                        size="sm"
                         variant="outline"
-                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        onClick={() =>
+                          updateQuantity(item.id, item.quantity + 1)
+                        }
                       >
                         +
                       </Button>
-                      <Button 
-                        size="sm" 
+                      <Button
+                        size="sm"
                         variant="destructive"
                         onClick={() => removeFromCart(item.id)}
                         className="ml-auto"
@@ -79,10 +96,12 @@ export default function CartDrawer() {
                   </div>
                 </div>
               ))}
-              
+
               <div className="border-t pt-4">
                 <div className="flex justify-between items-center mb-4">
-                  <span className="text-lg font-semibold">Total: R$ {total}</span>
+                  <span className="text-lg font-semibold">
+                    Total: R$ {total}
+                  </span>
                 </div>
                 <Button
                   variant="outline"
@@ -105,7 +124,7 @@ export default function CartDrawer() {
             Continuar comprando
           </Button>
           {items.length > 0 && (
-            <Button 
+            <Button
               className="rounded-[8px] px-4 py-2 h-fit bg-blue-600/80 hover:bg-blue-700"
               onClick={handleCheckout}
             >

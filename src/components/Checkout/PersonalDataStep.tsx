@@ -6,21 +6,16 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import type { CheckoutStepProps } from "@/types/checkout";
 import InputMask from "@mona-health/react-input-mask";
+import useUserStore from "@/store/userStore";
 
 export const PersonalDataStep: React.FC<CheckoutStepProps> = ({
   formData,
   onInputChange,
   onNext,
 }) => {
+  const {user} = useUserStore()
   const validateStep = () => {
     const errors: string[] = [];
-    
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!formData.email) {
-      errors.push('E-mail é obrigatório');
-    } else if (!emailRegex.test(formData.email)) {
-      errors.push('Digite um e-mail válido');
-    }
     
     const phoneRegex = /^\(\d{2}\)\s\d{4,5}-\d{4}$/;
     const phoneDigitsOnly = formData.phone.replace(/\D/g, '');
@@ -68,9 +63,8 @@ export const PersonalDataStep: React.FC<CheckoutStepProps> = ({
           <Input
             id="fullName"
             type="text"
-            value={formData.fullName}
-            onChange={(e) => onInputChange("fullName", e.target.value)}
-            placeholder="Seu nome completo"
+            value={user?.name}
+            disabled
           />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -79,9 +73,8 @@ export const PersonalDataStep: React.FC<CheckoutStepProps> = ({
             <Input
               id="email"
               type="email"
-              value={formData.email}
-              onChange={(e) => onInputChange("email", e.target.value)}
-              placeholder="seu@email.com"
+              value={user?.email}
+              disabled
             />
           </div>
           <div>

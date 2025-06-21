@@ -73,7 +73,7 @@ export const ProductPage = ({ productId, provider }: ProductPageProps) => {
           <div className="aspect-square overflow-hidden rounded-lg bg-gray-100">
             {product.image ? (
               <img
-                src={product.image}
+                src="/ImagemTeste.webp"
                 alt={productName}
                 className="w-full h-full object-cover"
               />
@@ -114,16 +114,16 @@ export const ProductPage = ({ productId, provider }: ProductPageProps) => {
                   {product.discountValue ? (
                     <div className="flex items-center gap-3 w-full">
                       <div className="text-[24px] font-medium text-neutral line-through">
-                        R${product?.price}
+                        R${product?.price},00
                       </div>
 
                       <div className="text-[28px] font-bold text-destructive">
-                        R${(product.price - product.discountValue)}
+                        R${product.price - product.discountValue},00
                       </div>
                     </div>
                   ) : (
                     <div className="text-3xl font-bold text-neutral">
-                      R${product.price}
+                      R${product.price},00
                     </div>
                   )}
                 </div>

@@ -35,7 +35,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             onClick={handleProductClick}
           >
             <img
-              src={product.image}
+              src="/ImagemTeste.webp"
               alt={productName}
               className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
             />
@@ -55,17 +55,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <CardFooter className="flex flex-col gap-4">
         {product.discountValue ? (
           <div className="flex items-center gap-3 w-full">
-            <div className="text-[20px] font-bold text-primary line-through">
+            <div className="text-[20px] font-bold text-neutral line-through">
               R${product?.price}
             </div>
 
-            <div className="text-[20px] font-bold text-primary">
+            <div className="text-[20px] font-bold text-destructive">
               R${(product.price - product.discountValue)}
             </div>
           </div>
         ) : (
-          <div className="text-[20px] font-bold text-primary w-full">
-            R${product?.price}
+          <div className="text-[20px] font-bold text-neutral w-full">
+            R${product?.price},00
           </div>
         )}
 

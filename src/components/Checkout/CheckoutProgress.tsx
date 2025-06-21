@@ -12,6 +12,7 @@ export const CheckoutProgress: React.FC<CheckoutProgressProps> = ({
   onStepClick
 }) => {
   const handleStepClick = (step: number) => {
+    // Só permite navegar para steps anteriores ou o atual
     if (step <= currentStep && onStepClick) {
       onStepClick(step);
     }
@@ -28,24 +29,24 @@ export const CheckoutProgress: React.FC<CheckoutProgressProps> = ({
         return (
           <div key={step} className="flex items-center">
             <div 
-              className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all duration-200 R${
+              className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all duration-200 ${
                 isCompleted 
                   ? 'bg-green-600 text-white' 
                   : isCurrent 
                   ? 'bg-blue-600 text-white' 
                   : 'bg-gray-200 text-gray-600'
-              } R${
+              } ${
                 isClickable && onStepClick 
                   ? 'cursor-pointer hover:scale-110 hover:shadow-md' 
                   : 'cursor-default'
               }`}
               onClick={() => handleStepClick(step)}
-              title={isClickable ? `Ir para step R${step}` : `Step R${step}`}
+              title={isClickable ? `Ir para step ${step}` : `Step ${step}`}
             >
               {isCompleted ? '✓' : step}
             </div>
             {step < totalSteps && (
-              <div className={`w-12 h-0.5 mx-2 R${
+              <div className={`w-12 h-0.5 mx-2 ${
                 currentStep > step ? 'bg-green-600' : 'bg-gray-200'
               }`} />
             )}
