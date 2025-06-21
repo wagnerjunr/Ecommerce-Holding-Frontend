@@ -47,7 +47,7 @@ Um projeto de e-commerce desenvolvido em React com TypeScript, utilizando as mel
 1. Clone o repositório:
 ```bash
 git clone https://github.com/wagnerjunr/Ecommerce-Holding-Frontend.git
-cd ecommerce
+cd Ecommerce-Holding-Frontend
 ```
 
 2. Instale as dependências:

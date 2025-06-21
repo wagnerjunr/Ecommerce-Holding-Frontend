@@ -86,7 +86,7 @@ export const ProductBanner = () => {
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url(${currentProduct.image})`,
         }}
       >
-        <div className="absolute inset-0 flex items-center justify-between p-8">
+        <div className="absolute inset-0 flex items-center justify-between p-8 px-20">
           <div className="text-white max-w-md space-y-4">
             <Badge variant="secondary" className="w-fit">
               {currentProduct.provider}
